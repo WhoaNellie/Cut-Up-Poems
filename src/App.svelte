@@ -1,17 +1,13 @@
 <script>
+	import Word from './Word.svelte';
+	let words = ["hi", "hello"];
 </script>
 
 <main>
-	<span>Everybody</span>
-	<span>loves</span>
-	<span>the</span>
-	<span>Homestar</span>
-	<span>Runner</span>
+ {#each words as w}
+	<Word word={w}/>
+ {/each}
 </main>
 
 <style>
-	span{
-		border: 1px solid black;
-		background-color: red;
-	}
 </style>
