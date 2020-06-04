@@ -1,12 +1,10 @@
 <script>
-	import Word from './Word.svelte';
-	let words = ["hi", "hello"];
+	import Words from './Words.svelte';
+	let words = ["hi","heey", "ahoy", "hello", "sup", "yarr", "ya ha ha"];
 </script>
 
 <main>
- {#each words as w}
-	<Word word={w}/>
- {/each}
+	<Words {words}/>
 </main>
 
 <style>

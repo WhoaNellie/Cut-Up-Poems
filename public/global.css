@@ -9,7 +9,9 @@ html, body {
 }
 
 body {
+	overflow: hidden;
 	color: #333;
+	background-color: wheat;
 	margin: 0;
 	padding: 8px;
 	box-sizing: border-box;
