@@ -56,14 +56,17 @@
     onMount(() => {
         let svgs = Array.from(document.getElementsByTagName("svg"));
         for(let i = 0; i < svgs.length; i++){
-            let text = svgs[i].firstChild;
+            let text = svgs[i].lastChild;
             let height = text.getBBox().height;
             let width = text.getBBox().width;
 
-            console.log(text.getBBox());
+            let calcHeight = height + text.getBBox().y + Math.random()*3;
+            let calcWidth = width + text.getBBox().x + Math.random()*15;
 
-            svgs[i].setAttribute("height", height + text.getBBox().y + Math.random()*3);
-            svgs[i].setAttribute("width", width + text.getBBox().x + Math.random()*15)
+            svgs[i].setAttribute("height", calcHeight);
+            svgs[i].setAttribute("width", calcWidth);
+
+            svgs[i].firstChild.setAttribute("d", `M 0 0 H ${calcWidth} V ${calcHeight} H 0 Z`);
         }
     })
 </script>
@@ -71,13 +74,22 @@
 {#each words as word}
 <svg 
     on:mousedown={handleDrag}
-    on:mouseup={handleRelease}>
-<text 
-    x={5 + Math.random()*20}
-    y={30 + Math.random()*20}
-    style={generateTextStyle()}>
-        {word}    
-    </text>
+    on:mouseup={handleRelease}
+>
+    <path 
+    d="M 0 0 H 100 V 100 H 0 Z"
+    fill="hsl(44, 100%, {97+Math.floor(Math.random()*4)}%)"
+    
+    >    
+    </path>
+
+    <text 
+        x={5 + Math.random()*20}
+        y={30 + Math.random()*20}
+        style={generateTextStyle()}>
+            {word}    
+        </text>
+
 </svg>
     
 {/each}
@@ -86,11 +98,15 @@
 <style>
     svg{
         /* width: fit-content; */
-        background-color: white;
-        box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.25);
         position: absolute;
         user-select: none;
     }
+
+    path{
+        box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.25);
+        pointer-events: none;
+    }
+
     text{
         pointer-events: none;
     }
