@@ -1,4 +1,5 @@
 <script>
+    import { onMount } from 'svelte';
     export let words;
     let clientY = 0;
     let clientX = 0;
@@ -13,8 +14,9 @@
         clientX = mouseEvent.clientX;
 
         // e.target.offsetHeight/2 
-        e.target.style.top = clientY + "px";
-        e.target.style.left = clientX + "px";
+        // console.log(e.target.height.baseVal.value);
+        e.target.style.top = clientY - e.target.height.baseVal.value/2 + "px";
+        e.target.style.left = clientX - e.target.width.baseVal.value/2 + "px";
     }
         document.addEventListener("mousemove", listener);
         e.target.style.zIndex = top;
@@ -42,19 +44,37 @@
 
     }
 
-    function getSVGWidth(svh){
-        console.log(svh)
-    }
+    // function getSVGWidth(svh){
+    //     console.log(svh)
+    // }
+
+    // document.addEventListener("DOMContentLoaded", function(){
+    //     let svgs = document.getElementsByTagName("svg");
+    //     console.log(svgs);
+    // })
+
+    onMount(() => {
+        let svgs = Array.from(document.getElementsByTagName("svg"));
+        for(let i = 0; i < svgs.length; i++){
+            let text = svgs[i].firstChild;
+            let height = text.getBBox().height;
+            let width = text.getBBox().width;
+
+            console.log(text.getBBox());
+
+            svgs[i].setAttribute("height", height + text.getBBox().y + Math.random()*3);
+            svgs[i].setAttribute("width", width + text.getBBox().x + Math.random()*15)
+        }
+    })
 </script>
 
 {#each words as word}
 <svg 
-    width={word.length + 5 + "em"}
-    height="10ex"
     on:mousedown={handleDrag}
     on:mouseup={handleRelease}>
 <text 
-    y="50"
+    x={5 + Math.random()*20}
+    y={30 + Math.random()*20}
     style={generateTextStyle()}>
         {word}    
     </text>
