@@ -63,10 +63,26 @@
             let calcHeight = height + text.getBBox().y + Math.random()*3;
             let calcWidth = width + text.getBBox().x + Math.random()*15;
 
-            svgs[i].setAttribute("height", calcHeight);
-            svgs[i].setAttribute("width", calcWidth);
+            svgs[i].setAttribute("height", calcHeight.toFixed(2));
+            svgs[i].setAttribute("width", calcWidth.toFixed(2));
 
-            svgs[i].firstChild.setAttribute("d", `M 0 0 H ${calcWidth} V ${calcHeight} H 0 Z`);
+            let x = Math.random()*5;
+            let y = Math.random()*10;
+
+            let x1 = Math.random()*20;
+            let y1 = y - Math.random()*y;
+
+            let x2 = Math.random()*(calcWidth - x1);
+            let y2 = y - Math.random()*y;
+
+            svgs[i].firstChild.setAttribute("d", 
+            `M ${x} ${y} 
+             C ${x1.toFixed(2)} ${y1.toFixed(2)}, 
+               ${x2.toFixed(2)} ${y2.toFixed(2)}, 
+               ${calcWidth.toFixed(2)} 0 
+             L ${calcWidth.toFixed(2)} ${calcHeight.toFixed(2)} 
+             L 0 ${calcHeight.toFixed(2)} 
+             Z`);
         }
     })
 </script>
@@ -77,15 +93,13 @@
     on:mouseup={handleRelease}
 >
     <path 
-    d="M 0 0 H 100 V 100 H 0 Z"
     fill="hsl(44, 100%, {97+Math.floor(Math.random()*4)}%)"
-    
     >    
     </path>
 
     <text 
-        x={5 + Math.random()*20}
-        y={30 + Math.random()*20}
+        x={(5 + Math.random()*20).toFixed(2)}
+        y={(35 + Math.random()*20).toFixed(2)}
         style={generateTextStyle()}>
             {word}    
         </text>
