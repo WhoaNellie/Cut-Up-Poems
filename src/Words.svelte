@@ -128,11 +128,11 @@
     svg{
         position: absolute;
         user-select: none;
-        filter: drop-shadow(2px 2px 2px #2b2b2173);
+        filter: drop-shadow(1px 1px 1px #2b2b2149);
     }
 
     path{
-        box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.25);
+        /* box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.25); */
         pointer-events: none;
     }
 
@@ -144,7 +144,9 @@
         cursor: grab;
     }
 
-    svg:active{
-        cursor: grabbing;
+    svg:active, svg:focus, path:active, text:active{
+        cursor: grabbing!important;
+        
+        filter: drop-shadow(2px 2px 2px #2b2b2173);
     }
 </style>
