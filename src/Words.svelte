@@ -19,6 +19,7 @@
                 // console.log(e.target.height.baseVal.value);
                 e.target.style.top = clientY - e.target.height.baseVal.value/2 + "px";
                 e.target.style.left = clientX - e.target.width.baseVal.value/2 + "px";
+                e.target.style.filter = "drop-shadow(2px 2px 2px #2b2b2173)";
             }
             document.addEventListener("mousemove", mouseListener);
             e.target.style.zIndex = top;
@@ -30,6 +31,7 @@
 
                 e.target.style.top = clientY - e.target.height.baseVal.value/2 + "px";
                 e.target.style.left = clientX - e.target.width.baseVal.value/2 + "px";
+                e.target.style.filter = "drop-shadow(2px 2px 2px #2b2b2173)";
             }
             document.addEventListener("touchmove", touchListener);
             e.target.style.zIndex = top;
@@ -38,6 +40,7 @@
     }
 
     function handleRelease(e){
+        e.target.style.filter = "drop-shadow(1px 1px 1px #2b2b2149)";
         document.removeEventListener("mousemove", mouseListener);
         document.removeEventListener("touchmove", touchListener);
     }
@@ -46,8 +49,6 @@
         let size = (1.7 + Math.random()*1.2).toFixed(2) + "rem";
         let colors = ["#333", "#271d1d", "#1d1d27", "#464646", "#0e0e0a", "#8a1503", "#2a3980", "#282894"];
         let fonts = ["serif", "sans-serif", "helvetica", "arial", "Times New Roman", "Georgia", "Book Antiqua", "Impact", "Lucida Sans Unicode", "Courier New", "Lucida Console", "Trebuchet MS"];
-        // let padding = `${Math.random().toFixed(2)}rem ${Math.random().toFixed(2)}rem ${Math.random().toFixed(2)}rem ${Math.random().toFixed(2)}rem`;
-        // let background = `hsl(44, 100%, ${95+Math.floor(Math.random()*6)}%)`;
 
         return `font-size: ${size};
                 fill: ${colors[Math.floor(Math.random()*colors.length)]};
