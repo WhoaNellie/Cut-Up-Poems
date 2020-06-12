@@ -4,28 +4,42 @@
     let clientY = 0;
     let clientX = 0;
 
-    let listener;
+    let mouseListener;
+    let touchListener;
 
     let top = words.length+1;
 
     function handleDrag(e){
-        listener = function(mouseEvent) {
-        clientY = mouseEvent.clientY;
-        clientX = mouseEvent.clientX;
+        if(e.type === "mousedown"){
+            mouseListener = function(mouseEvent) {
+                clientY = mouseEvent.clientY;
+                clientX = mouseEvent.clientX;
 
-        // e.target.offsetHeight/2 
-        // console.log(e.target.height.baseVal.value);
-        e.target.style.top = clientY - e.target.height.baseVal.value/2 + "px";
-        e.target.style.left = clientX - e.target.width.baseVal.value/2 + "px";
-    }
-        document.addEventListener("mousemove", listener);
-        e.target.style.zIndex = top;
-        top++;
-       
+                // e.target.offsetHeight/2 
+                // console.log(e.target.height.baseVal.value);
+                e.target.style.top = clientY - e.target.height.baseVal.value/2 + "px";
+                e.target.style.left = clientX - e.target.width.baseVal.value/2 + "px";
+            }
+            document.addEventListener("mousemove", mouseListener);
+            e.target.style.zIndex = top;
+            top++;
+        }else if(e.type === "touchstart"){
+            touchListener = function(touchEvent) {
+                clientY = touchEvent.changedTouches[0].pageY;
+                clientX = touchEvent.changedTouches[0].pageX;
+
+                e.target.style.top = clientY - e.target.height.baseVal.value/2 + "px";
+                e.target.style.left = clientX - e.target.width.baseVal.value/2 + "px";
+            }
+            document.addEventListener("touchmove", touchListener);
+            e.target.style.zIndex = top;
+            top++;
+        }
     }
 
-    function handleRelease(){
-        document.removeEventListener("mousemove", listener);
+    function handleRelease(e){
+        document.removeEventListener("mousemove", mouseListener);
+        document.removeEventListener("touchmove", touchListener);
     }
 
     function generateTextStyle(){
@@ -39,15 +53,6 @@
                 fill: ${colors[Math.floor(Math.random()*colors.length)]};
                 font-family: ${fonts[Math.floor(Math.random()*fonts.length)]};`;
     }
-
-    // function getSVGWidth(svh){
-    //     console.log(svh)
-    // }
-
-    // document.addEventListener("DOMContentLoaded", function(){
-    //     let svgs = document.getElementsByTagName("svg");
-    //     console.log(svgs);
-    // })
 
     onMount(() => {
         let svgs = Array.from(document.getElementsByTagName("svg"));
@@ -101,6 +106,9 @@
 <svg 
     on:mousedown={handleDrag}
     on:mouseup={handleRelease}
+
+    on:touchstart={handleDrag}
+    on:touchend={handleRelease}
 >
     <path 
     fill="hsl(44, 100%, {97+Math.floor(Math.random()*4)}%)"
