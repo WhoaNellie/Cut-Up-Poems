@@ -1,5 +1,5 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, afterUpdate } from 'svelte';
     export let words;
     let clientY = 0;
     let clientX = 0;
@@ -55,7 +55,8 @@
                 font-family: ${fonts[Math.floor(Math.random()*fonts.length)]};`;
     }
 
-    onMount(() => {
+    function generateWords(){
+        console.log("generate words")
         let svgs = Array.from(document.getElementsByTagName("svg"));
         for(let i = 0; i < svgs.length; i++){
             let text = svgs[i].lastChild;
@@ -100,6 +101,16 @@
             let paperPath = paper.cloneNode(true);
             svgs[i].querySelector(":nth-child(2)").append(paperPath);
         }
+    }
+
+    onMount(() => {
+        console.log("mount")
+        generateWords();
+    })
+
+    afterUpdate(() => {
+        console.log("updated")
+        generateWords();
     })
 </script>
 
