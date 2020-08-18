@@ -2,6 +2,7 @@
 	import Words from './Words.svelte';
 	let words = ["hi","heey", "ahoy", "hello", "sup", "yarr", "ya ha ha"];
 	let wordsStr = '';
+	
 	function getWords(){
 		words = wordsStr.split(" ");
 	}
@@ -13,8 +14,8 @@
 		<button id="submitWords" on:click={getWords}>Submit</button>
 	</div>
 	
-	<div class="pasteHere">
-	</div>
+	<!-- <div class="pasteHere">
+	</div> -->
 	<Words {words}/>
 </main>
 <!-- ideas

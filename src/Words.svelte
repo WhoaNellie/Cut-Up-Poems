@@ -56,7 +56,7 @@
     }
 
     function generateWords(){
-        console.log("generate words")
+        // console.log("generate words")
         let svgs = Array.from(document.getElementsByTagName("svg"));
         for(let i = 0; i < svgs.length; i++){
             let text = svgs[i].lastChild;
@@ -100,16 +100,20 @@
             let paper = svgs[i].firstChild;
             let paperPath = paper.cloneNode(true);
             svgs[i].querySelector(":nth-child(2)").append(paperPath);
+
+            //place randomly on page
+            svgs[i].style.top = `${Math.max(50, Math.random()*window.innerHeight - 50)}px`;
+            svgs[i].style.left = `${Math.max(50, Math.random()*window.innerWidth - 100)}px`;
         }
     }
 
     onMount(() => {
-        console.log("mount")
+        // console.log("mount")
         generateWords();
     })
 
     afterUpdate(() => {
-        console.log("updated")
+        // console.log("updated")
         generateWords();
     })
 </script>
