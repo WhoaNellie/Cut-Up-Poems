@@ -2,8 +2,9 @@
 	import Words from './Words.svelte';
 	let words = ["hi","heey", "ahoy", "hello", "sup", "yarr", "ya ha ha"];
 	let wordsStr = '';
-	
+
 	function getWords(){
+		words = [];
 		words = wordsStr.split(" ");
 	}
 </script>

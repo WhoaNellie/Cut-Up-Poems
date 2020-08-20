@@ -1,5 +1,6 @@
 <script>
     import { onMount, afterUpdate } from 'svelte';
+    import { fly } from 'svelte/transition';
     export let words;
     let clientY = 0;
     let clientX = 0;
@@ -102,8 +103,8 @@
             svgs[i].querySelector(":nth-child(2)").append(paperPath);
 
             //place randomly on page
-            svgs[i].style.top = `${Math.max(50, Math.random()*window.innerHeight - 50)}px`;
-            svgs[i].style.left = `${Math.max(50, Math.random()*window.innerWidth - 100)}px`;
+            svgs[i].style.top = `${Math.random()*window.innerHeight - 10}px`;
+            svgs[i].style.left = `${Math.random()*window.innerWidth - 20}px`;
         }
     }
 
@@ -113,7 +114,7 @@
     })
 
     afterUpdate(() => {
-        // console.log("updated")
+        console.log("updated")
         generateWords();
     })
 </script>
@@ -125,6 +126,8 @@
 
     on:touchstart={handleDrag}
     on:touchend={handleRelease}
+
+    in:fly="{{ x: 100, y: 200, duration: 2000, opacity: 1 }}"
 >
     <path 
     fill="hsl(44, 100%, {97+Math.floor(Math.random()*4)}%)"
