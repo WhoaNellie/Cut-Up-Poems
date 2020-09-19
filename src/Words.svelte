@@ -105,6 +105,8 @@
             //place randomly on page
             svgs[i].style.top = `${Math.random()*window.innerHeight - 10}px`;
             svgs[i].style.left = `${Math.random()*window.innerWidth - 20}px`;
+
+            
         }
     }
 
@@ -113,9 +115,15 @@
         generateWords();
     })
 
-    afterUpdate(() => {
+    afterUpdate(function() {
         console.log("updated")
         generateWords();
+        // let svgs = Array.from(document.getElementsByTagName("svg"));
+        // for(let i = 0; i < svgs.length; i++){
+        //     fly(svgs[i], { x: 100, y: 200, duration: 2000, opacity: 1 });
+        // }
+        // fly(this, { x: 100, y: 200, duration: 2000, opacity: 1 })
+        console.log(this);
     })
 </script>
 
@@ -126,8 +134,6 @@
 
     on:touchstart={handleDrag}
     on:touchend={handleRelease}
-
-    in:fly="{{ x: 100, y: 200, duration: 2000, opacity: 1 }}"
 >
     <path 
     fill="hsl(44, 100%, {97+Math.floor(Math.random()*4)}%)"

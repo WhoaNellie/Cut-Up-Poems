@@ -5,6 +5,8 @@
 
 	function getWords(){
 		words = [];
+		//find test-string for this, possibly add invisible chars?
+		words = wordsStr.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, '');
 		words = wordsStr.split(" ");
 	}
 </script>
