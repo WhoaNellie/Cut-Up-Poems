@@ -1,29 +1,46 @@
 <script>
 	import Words from './Words.svelte';
-	let words = ["hi","heey", "ahoy", "hello", "sup", "yarr", "ya ha ha"];
-	let wordsStr = '';
+	let words = [];
+	let wordsStr = 
+`Take a newspaper.
+Take some scissors.
+Choose from this paper an article of the length you want to make your poem.
+Cut out the article.
+Next carefully cut out each of the words that makes up this article and put them all in a bag.
+Shake gently.
+Next take out each cutting one after the other.
+Copy conscientiously in the order in which they left the bag.
+The poem will resemble you.
+And there you are—an infinitely original author of charming sensibility, even though unappreciated by the vulgar herd.`;
+	let visible = true;
 
 	function getWords(){
+		visible = false;
 		words = [];
 		//find test-string for this, possibly add invisible chars?
 		words = wordsStr.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, '');
 		words = wordsStr.split(" ");
+		
 	}
 </script>
 
+
 <main>
+	{#if visible}
 	<div id="chooseWords">
-		<textarea id="words" cols="30" rows="10" placeholder="Words to Use" bind:value={wordsStr}></textarea>
-		<button id="submitWords" on:click={getWords}>Submit</button>
+		<h1>To Make a Dadaist Poem</h1>
+		<p>This is a virtual poetry maker based on Tristan Tzara's instructions! Paste any text below and rearrange to your heart's content.</p>
+		<textarea id="words" cols="30" rows="10" bind:value={wordsStr}></textarea>
+		<button id="submitWords" on:click={getWords}>Cut Out</button>
 	</div>
+	{/if}
 	
-	<!-- <div class="pasteHere">
-	</div> -->
 	<Words {words}/>
 </main>
 <!-- ideas
  splash words onto page
  shake phone to shuffle
+ wikipedia api?
  menu of what types of words to select
 	parts of speech
 	yes/no curses
@@ -33,28 +50,28 @@
  -->
 <style>
 	#chooseWords{
-		position: fixed;
-		top: 0;
-		right: 0;
+		/* position: fixed;
+		top: max(30vh, calc(50vh - 250px));
+		left: max(30vw, calc(50vw - 350px)); */
+		margin: max(20vh, calc(40vh - 250px)) auto;
 		z-index: 2;
-		width: min-content;
-		height: min-content;
+		width: min(40vw, 700px);
+		height: min(40vh, 500px);
+		text-align: center;
+
+		color: rgb(255, 247, 238);
 	}
 
-	.pasteHere{
-		width: 90vw;
-		height: 90vh;
-		background-image: url("./img/soft-wallpaper.jpg");
-		position: absolute;
-		left: calc((100vw - 90vw) / 2);
-		top: 5vh;
-		box-shadow: 2px 2px 5px 3px rgba(0,0,0,0.25);
+	#words{
+		width: 100%;
 	}
-	.pasteHere::after{
-		content: '';
-		background-color: #fffeeb52;
-		position: absolute;
-		width: 90vw;
-		height: 90vh;
+
+	#submitWords{
+		width: 50%;
 	}
+
+	#chooseWords.collapsed{
+
+	}
+
 </style>
