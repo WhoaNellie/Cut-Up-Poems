@@ -18,8 +18,8 @@ And there you are—an infinitely original author of charming sensibility, even 
 		visible = false;
 		words = [];
 		//find test-string for this, possibly add invisible chars?
-		words = wordsStr.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, '');
-		words = wordsStr.split(" ");
+		words = wordsStr.replace(/[\s\x0B\x0C\u0085\u2028\u2029]+/g, ' ');
+		words = words.split(" ");
 		
 	}
 </script>
