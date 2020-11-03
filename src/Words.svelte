@@ -1,5 +1,5 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, afterUpdate } from 'svelte';
     export let words;
     let clientY = 0;
     let clientX = 0;
@@ -113,7 +113,7 @@
         generateWords();
     })
 
-    afterUpdate(function() {
+    afterUpdate(() => {
         generateWords();
         // let svgs = Array.from(document.getElementsByTagName("svg"));
         // for(let i = 0; i < svgs.length; i++){

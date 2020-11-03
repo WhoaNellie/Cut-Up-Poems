@@ -14,6 +14,7 @@ The poem will resemble you.
 And there you are—an infinitely original author of charming sensibility, even though unappreciated by the vulgar herd.`;
 	let visible = true;
 	let expand = "hidden";
+	let delete_zone;
 
 	function getWords(){
 		visible = false;
@@ -38,7 +39,7 @@ And there you are—an infinitely original author of charming sensibility, even 
 	</div>
 	{:else}
 		<div class="tools">
-			<div class="delete tool" title="Drag words here to delete" tabindex="0">Delete</div>
+			<div class="delete tool" title="Drag words here to delete" tabindex="0" bind:this={delete_zone} >Delete</div>
 			<div class:expand>
 				<textarea id="words" cols="30" rows="10" bind:value={wordsStr} ></textarea>
 				<button id="submitWords" on:click={getWords} class:expand>Cut Out</button>
@@ -85,10 +86,9 @@ And there you are—an infinitely original author of charming sensibility, even 
 		display: none;
 	}
 
-	#words.expeanded, #submitWords.expanded{
+	#words.expanded, #submitWords.expanded{
 		display: block;
 	}
-
 
 	.tools{
 		display: flex;
