@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream:public/bundle.css
-.pasteHere.svelte-jhumrr{width:8.5in;height:11in;background-color:whitesmoke;position:absolute;left:calc((100vw - 8.5in) / 2);box-shadow:2px 2px 5px 0px rgba(0,0,0,0.25)}
-=======
 #chooseWords.svelte-pvh4kx{position:fixed;top:max(30vh, calc(50vh - 250px));left:max(30vw, calc(50vw - 350px));width:min(40vw, 700px);height:min(40vh, 500px);text-align:center;color:rgb(255, 247, 238)}#words.svelte-pvh4kx{width:100%}#submitWords.svelte-pvh4kx{width:50%}
->>>>>>> Stashed changes:docs/bundle.css
 svg.svelte-jhpy9z{position:absolute;user-select:none;filter:drop-shadow(1px 1px 1px #2b2b2149)}path.svelte-jhpy9z{pointer-events:none}text.svelte-jhpy9z{pointer-events:none}svg.svelte-jhpy9z:hover{cursor:grab}svg.svelte-jhpy9z:active,svg.svelte-jhpy9z:focus,path.svelte-jhpy9z:active,text.svelte-jhpy9z:active{cursor:grabbing!important;filter:drop-shadow(2px 2px 2px #2b2b2173)}
 
 /*# sourceMappingURL=bundle.css.map */

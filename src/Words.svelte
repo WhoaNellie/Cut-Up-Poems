@@ -15,8 +15,6 @@
                 clientY = mouseEvent.clientY;
                 clientX = mouseEvent.clientX;
 
-                // e.target.offsetHeight/2 
-                // console.log(e.target.height.baseVal.value);
                 e.target.style.top = clientY - e.target.height.baseVal.value/2 + "px";
                 e.target.style.left = clientX - e.target.width.baseVal.value/2 + "px";
                 e.target.style.filter = "drop-shadow(2px 2px 2px #2b2b2173)";
@@ -55,7 +53,7 @@
                 font-family: ${fonts[Math.floor(Math.random()*fonts.length)]};`;
     }
 
-    onMount(() => {
+    function generateWords(){
         let svgs = Array.from(document.getElementsByTagName("svg"));
         for(let i = 0; i < svgs.length; i++){
             let text = svgs[i].lastChild;
@@ -99,7 +97,29 @@
             let paper = svgs[i].firstChild;
             let paperPath = paper.cloneNode(true);
             svgs[i].querySelector(":nth-child(2)").append(paperPath);
+
+            //place randomly on page
+            // svgs[i].style.top = `${Math.random()*window.innerHeight - 10}px`;
+            // svgs[i].style.left = `${Math.random()*window.innerWidth - 20}px`;
+
+            svgs[i].style.top = `${Math.random()*90 + 5}%`;
+            svgs[i].style.left = `${Math.random()*85 + 5}%`;
+
+            
         }
+    }
+
+    onMount(() => {
+        generateWords();
+    })
+
+    afterUpdate(function() {
+        generateWords();
+        // let svgs = Array.from(document.getElementsByTagName("svg"));
+        // for(let i = 0; i < svgs.length; i++){
+        //     fly(svgs[i], { x: 100, y: 200, duration: 2000, opacity: 1 });
+        // }
+        // fly(this, { x: 100, y: 200, duration: 2000, opacity: 1 })
     })
 </script>
 
